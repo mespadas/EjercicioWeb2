@@ -1,0 +1,32 @@
+﻿
+@model EjercicioWeb2.Models.LoginViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Iniciar Sesion</title>
+</head>
+<body>
+  
+    <div>
+        Hola @Model.Usuario
+        <br />
+        @using (Html.BeginForm("DoLogin", "Login", FormMethod.Post, new { @class = "form", role = "form", @id = "RegisterForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="container">
+                <label for="usuario"><b>Usuario</b></label>
+                @Html.TextBoxFor(m => m.Usuario, new { @class = "form-control", type = "text", @autocomplete = "off", placeholder = "Usuario", @required = "required" })
+                <label for="contrasena"><b>Contrase&ntilde;a</b></label>
+                @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", type = "password", @autocomplete = "off", placeholder = "Contraseña", @required = "required" })
+                <button type="submit">Iniciar Sesi&oacute;n</button>
+            </div>
+        }
+    </div>
+</body>
+</html>
