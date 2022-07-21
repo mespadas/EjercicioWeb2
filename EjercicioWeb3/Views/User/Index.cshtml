@@ -34,6 +34,7 @@
                 <tr>
                     <th>Correo</th>
                     <th>Nombre completo</th>
+                    <th>Teléfono</th>
                     <th>Rol</th>
                     <th>Fecha de Creación</th>
                     <th>Editar</th>
@@ -42,13 +43,14 @@
             <tbody>
                 @foreach (var usuario in Model.Usuarios)
                 {
-                    <tr>
-                        <td>@usuario.Email</td>
-                        <td>@usuario.Nombre</td>
-                        <td>@usuario.NombreRol</td>
-                        <td>Fecha de Creación</td>
-                        <td>Editar</td>
-                    </tr>
+                <tr>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.TelefonoMovil</td>
+                    <td>@usuario.NombreRol</td>
+                    <td>@usuario.FechaCreacion</td>
+                    <td>@Html.ActionLink("Editar", "EditarUsuario", "User", new { Id = usuario.Id }, new { @class = "btn btn-info" })</td>
+                </tr>
                 }
             </tbody>
         </table>

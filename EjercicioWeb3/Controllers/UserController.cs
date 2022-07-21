@@ -15,7 +15,7 @@ namespace EjercicioWeb3.Controllers
         public ActionResult Index()
         {
             UserAdminViewModel model = new UserAdminViewModel();
-            return View(model);
+            return Buscar(model);
         }
 
         public ActionResult Buscar(UserAdminViewModel model)
@@ -26,8 +26,9 @@ namespace EjercicioWeb3.Controllers
                 model.Usuarios.Add(new UserViewModel() {
                     Id = user.Id,
                     Nombre = user.Nombre + " " + user.Apellido,
-                    FechaCreacion = user.FechaCreacion.ToString(),
-                    NombreRol = user.Rol.Nombre,
+                    FechaCreacion = user.FechaCreacion.ToString("dd/MM/yyyy hh:mm"),
+                    NombreRol = user.Rol?.Nombre,
+                    TelefonoMovil = user.Telefono,
                     Email = user.Email
                 });
             }
@@ -43,7 +44,19 @@ namespace EjercicioWeb3.Controllers
 
         public ActionResult EditarUsuario(int Id)
         {
-            UserViewModel model = new UserViewModel();
+            UserBO user = UserDAO.GetUser(Id);
+            UserViewModel model = new UserViewModel
+            {
+                Id = user.Id,
+                Nombre = user.Nombre,
+                Apellidos = user.Apellido,
+                Email = user.Email,
+                TelefonoMovil = user.Telefono,
+                Contrasena = user.Contrasena,
+                ConfirmarContrasena = user.Contrasena,
+                RolId = user.RolId
+            };
+
             PopularCampos(model);
             return View("Form", model);
         }
@@ -58,15 +71,19 @@ namespace EjercicioWeb3.Controllers
             }
 
             UserBO userBO = new UserBO();
+            //RoleBO roleBO = RolDAO.GetRole(model.RolId);
             if (model.Id > 0)
             {
                 userBO = UserDAO.GetUser(model.Id);
             }
+
             userBO.Nombre = model.Nombre;
+            userBO.Apellido = model.Apellidos;
             userBO.Email = model.Email;
             userBO.Contrasena = model.Contrasena;
             userBO.Telefono = model.TelefonoMovil;
-            userBO.Rol = new RoleBO() { Id = model.RolId };
+            userBO.RolId = model.RolId;
+            //userBO.Rol = roleBO;
 
             UserDAO.SaveUser(userBO);
             

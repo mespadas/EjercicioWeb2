@@ -24,6 +24,9 @@ namespace EjercicioWeb.BO
         public string Contrasena { set; get; }
         [Column("fecha_creacion")]
         public DateTime FechaCreacion { set; get; }
-        public RoleBO Rol { set; get; }
+        [Column("RolId")]
+        public int RolId { set; get; }
+        [ForeignKey("RolId")]
+        public virtual RoleBO Rol { set; get; }
     }
 }

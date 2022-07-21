@@ -11,14 +11,15 @@ namespace EjercicioWeb.DAL
     {
         public static List<RoleBO> GetRoles()
         {
-            //TODO: acceder a la bd
-            List<RoleBO> roles = new List<RoleBO>
-            {
-                new RoleBO() { Nombre = "Administrador", Id = 1 },
-                new RoleBO() { Nombre = "Operador", Id = 2 },
-                new RoleBO() { Nombre = "Solo Lectura", Id = 3 }
-            };
-            return roles;
+            var DaoContext = new DAOContext();
+            var roles = DaoContext.Roles;
+            return roles.ToList();
+        }
+
+        public static RoleBO GetRole(int id)
+        {
+            var DaoContext = new DAOContext();
+            return DaoContext.Roles.Find(id);
         }
     }
 }
