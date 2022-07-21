@@ -1,5 +1,5 @@
 ﻿using EjercicioWeb.BO;
-using MySql.Data.MySqlClient;
+using MySql.Data.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EjercicioWeb.DAL
 {
-    [DbConfigurationType(typeof(MySqlConfiguration))]
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class DAOContext : DbContext
     {
         public DAOContext() : base("MyContext") { }
