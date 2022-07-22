@@ -15,6 +15,7 @@ namespace EjercicioWeb3.Controllers
         public ActionResult Index()
         {
             UserAdminViewModel model = new UserAdminViewModel();
+            model.Busqueda = "";
             return Buscar(model);
         }
 
@@ -56,7 +57,6 @@ namespace EjercicioWeb3.Controllers
                 ConfirmarContrasena = user.Contrasena,
                 RolId = user.RolId
             };
-
             PopularCampos(model);
             return View("Form", model);
         }
@@ -68,19 +68,24 @@ namespace EjercicioWeb3.Controllers
                 ViewBag.Mensaje = "Las contraseñas no coinciden";
                 PopularCampos(model);
                 return View("Form", model);
-            }
+            } 
 
+            // Realizamos la logica de negocio
             UserBO userBO = new UserBO();
             //RoleBO roleBO = RolDAO.GetRole(model.RolId);
             if (model.Id > 0)
             {
                 userBO = UserDAO.GetUser(model.Id);
             }
+            else
+            {
+                userBO.FechaCreacion = DateTime.Now;
+                userBO.Contrasena = model.Contrasena;
+            }
 
             userBO.Nombre = model.Nombre;
             userBO.Apellido = model.Apellidos;
             userBO.Email = model.Email;
-            userBO.Contrasena = model.Contrasena;
             userBO.Telefono = model.TelefonoMovil;
             userBO.RolId = model.RolId;
             //userBO.Rol = roleBO;
@@ -88,6 +93,7 @@ namespace EjercicioWeb3.Controllers
             UserDAO.SaveUser(userBO);
             
             return Index();
+
         }
 
         private void PopularCampos(UserViewModel model)

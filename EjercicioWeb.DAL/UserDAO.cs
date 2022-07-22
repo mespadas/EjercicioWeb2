@@ -12,11 +12,13 @@ namespace EjercicioWeb.DAL
     {
         public static List<UserBO> GetUsers(string termino)
         {
-            var DaoContext = new DAOContext();
+            var DaoContext = DAOContextFactory.GetDAOContext();
             if (!String.IsNullOrWhiteSpace(termino))
             {
                 var users = from u in DaoContext.Users
-                            where (u.Nombre.ToUpper().Contains(termino) || u.Apellido.ToUpper().Contains(termino) || u.Email.ToUpper().Contains(termino))
+                            where (u.Nombre.ToUpper().Contains(termino) 
+                                || u.Apellido.ToUpper().Contains(termino) 
+                                || u.Email.ToUpper().Contains(termino))
                             select u;
                 return users.ToList();
             }
@@ -27,16 +29,15 @@ namespace EjercicioWeb.DAL
         }
         public static UserBO GetUser(int id)
         {
-            var DaoContext = new DAOContext();
+            var DaoContext = DAOContextFactory.GetDAOContext();
             return DaoContext.Users.Find(id);
         }
 
         public static UserBO SaveUser(UserBO userBO)
         {
-            var DaoContext = new DAOContext();
+            var DaoContext = DAOContextFactory.GetDAOContext();
             if (userBO.Id == 0)
             {
-                userBO.FechaCreacion = DateTime.Now;
                 DaoContext.Users.Add(userBO);
             }
             else

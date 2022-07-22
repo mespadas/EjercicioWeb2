@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOContext.cs" />
+    <Compile Include="DAOContextFactory.cs" />
     <Compile Include="RolDAO.cs" />
     <Compile Include="UserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -13,7 +13,7 @@ namespace EjercicioWeb.DAL
     public class DAOContext : DbContext
     {
         public DAOContext() : base("MyContext") { }
-        public DbSet<UserBO> Users { set; get; }
         public DbSet<RoleBO> Roles { set; get; }
+        public DbSet<UserBO> Users { set; get; }
     }
 }

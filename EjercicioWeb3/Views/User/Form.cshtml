@@ -25,35 +25,42 @@
         </div>
     }
 
-    <div class="middle-box text-center animated fadeInDown col-4">
-        @using (Html.BeginForm("GuardarUsuario", "User", FormMethod.Post, new { @class = "form", role = "form", @id = "UserForm" }))
-        {
-            @Html.AntiForgeryToken()
-            @Html.HiddenFor(m => m.Id)
-            <div class="input-group mb-3">
-                <label for="Nombre"><b>Nombre</b></label>
-                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", type = "text", placeholder = "Nombre", @required = "required" })
-            </div>
-            <div class="input-group mb-3">
-                <label for="Nombre"><b>Apellidos</b></label>
-                @Html.TextBoxFor(m => m.Apellidos, new { @class = "form-control", type = "text", placeholder = "Apellidos", @required = "required" })
-            </div>
-            <div class="input-group mb-3">
-                <label for="Email"><b>Email</b></label>
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "text", placeholder = "Email", @required = "required" })
-            </div>
-            <div class="input-group mb-3">
-                <label for="TelefonoMovil"><b>Telefono Movil</b></label>
-                @Html.TextBoxFor(m => m.TelefonoMovil, new { @class = "form-control", type = "text", placeholder = "Telefono Movil", @required = "required" })
-            </div>
-            <div class="input-group mb-3">
-                <label for="Contrasena"><b>Contrase&ntilde;a</b></label>
-                @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", placeholder = "Contraseña", @required = "required" })
-            </div>
-            <div class="input-group mb-3">
-                <label for="ConfirmarContrasena"><b>Confirmar Contrase&ntilde;a</b></label>
-                @Html.PasswordFor(m => m.ConfirmarContrasena, new { @class = "form-control", placeholder = "Confirmar Contraseña", @required = "required" })
-            </div>
+        <div class="middle-box text-center animated fadeInDown col-4">
+            @using (Html.BeginForm("GuardarUsuario", "User", FormMethod.Post, new { @class = "form", role = "form", @id = "UserForm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.Id)
+                <div class="input-group mb-3">
+                    <label for="Nombre"><b>Nombre</b></label>
+                    @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control", type = "text", placeholder = "Nombre", @required = "required" })
+                </div>
+                <div class="input-group mb-3">
+                    <label for="Nombre"><b>Apellidos</b></label>
+                    @Html.TextBoxFor(m => m.Apellidos, new { @class = "form-control", type = "text", placeholder = "Apellidos", @required = "required" })
+                </div>
+                <div class="input-group mb-3">
+                    <label for="Email"><b>Email</b></label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "text", placeholder = "Email", @required = "required" })
+                </div>
+                <div class="input-group mb-3">
+                    <label for="TelefonoMovil"><b>Telefono M&oacute;vil</b></label>
+                    @Html.TextBoxFor(m => m.TelefonoMovil, new { @class = "form-control", type = "text", placeholder = "Telefono Movil", @required = "required" })
+                </div>
+                if(Model.Id == 0)
+                {
+                    <div class="input-group mb-3">
+                        <label for="Contrasena"><b>Contrase&ntilde;a</b></label>
+                        @Html.PasswordFor(m => m.Contrasena, new { @class = "form-control", placeholder = "Contraseña", @required = "required" })
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <label for="ConfirmarContrasena"><b>Confirmar Contrase&ntilde;a</b></label>
+                        @Html.PasswordFor(m => m.ConfirmarContrasena, new { @class = "form-control", placeholder = "Confirmar Contraseña", @required = "required" })
+                    </div>
+                } else
+                {
+                    <div>Contraseña capturada</div>
+                }
             <div class="input-group mb-3">
                 <label for="RolId"><b>Rol</b></label>
                 @Html.DropDownListFor(model => model.RolId, Model.Roles, "Seleccione un rol", new { @class = "form-control", @required = "required" })
@@ -62,8 +69,8 @@
                 <button type="submit" class="btn btn-primary">Guardar</button>
                 @Html.ActionLink("Cancelar", "Index", "User", new { @class = "btn btn-info" })
             </div>
-        }
-    </div>
+            }
+        </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
